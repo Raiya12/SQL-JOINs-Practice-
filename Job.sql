@@ -128,3 +128,10 @@ FROM Applications a
 JOIN JobSeekers js ON a.SeekerID = js.SeekerID
 JOIN Jobs j ON a.JobID = j.JobID
 WHERE j.Salary > 850 AND js.City <> j.Location;
+
+--Task 10 Show all job seekers and the job city they applied to, even if they live elsewhere. 
+--➡ JOIN JobSeekers → Applications → Jobs; show seeker name, seeker city, job location. 
+SELECT js.FullName AS seeker_name, js.City AS seeker_city,j.Location AS job_city
+FROM Applications a
+JOIN JobSeekers js ON a.SeekerID = js.SeekerID
+JOIN Jobs j ON a.JobID = j.JobID;
