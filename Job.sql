@@ -95,3 +95,10 @@ SELECT js.FullName AS seeker_name, j.Title AS job_title, a.Status AS application
 FROM JobSeekers js
 LEFT JOIN Applications a ON js.SeekerID = a.SeekerID
 LEFT JOIN Jobs j ON a.JobID = j.JobID;
+
+--Task 5:Show each job title with the name of the job seeker who applied (if any). If no one applied, still show the job title. 
+--➡ Use LEFT JOIN from Jobs → Applications → JobSeekers.
+SELECT j.Title AS job_title, js.FullName AS seeker_name
+FROM Jobs j
+LEFT JOIN Applications a ON j.JobID = a.JobID
+LEFT JOIN JobSeekers js ON a.SeekerID = js.SeekerID;
