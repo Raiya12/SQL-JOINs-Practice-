@@ -149,3 +149,13 @@ SELECT js.FullName AS seeker_name, j.Title AS job_title, js.City AS matching_cit
 FROM Applications a
 JOIN JobSeekers js ON a.SeekerID = js.SeekerID
 JOIN Jobs j ON a.JobID = j.JobID WHERE js.City = j.Location;
+
+--Task 13:Find two job seekers who live in the same city but applied to different jobs. 
+--➡ Use SELF JOIN and JOIN on Applications and Jobs; make sure job IDs are different.
+SELECT s1.FullName AS seeker1_name, s2.FullName AS seeker2_name, s1.City AS shared_city, j1.Title AS seeker1_job, j2.Title AS seeker2_job
+FROM JobSeekers s1
+JOIN Applications a1 ON s1.SeekerID = a1.SeekerID
+JOIN Jobs j1 ON a1.JobID = j1.JobID
+JOIN JobSeekers s2 ON s1.City = s2.City AND s1.SeekerID <> s2.SeekerID
+JOIN Applications a2 ON s2.SeekerID = a2.SeekerID
+JOIN Jobs j2 ON a2.JobID = j2.JobID WHERE j1.JobID <> j2.JobID;
