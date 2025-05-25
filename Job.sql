@@ -120,3 +120,11 @@ LEFT JOIN Jobs j ON c.CompanyID = j.CompanyID WHERE j.JobID IS NULL;
 SELECT s1.FullName AS seeker1_name, s2.FullName AS seeker2_name, s1.City AS shared_city
 FROM JobSeekers s1
 JOIN JobSeekers s2 ON s1.City = s2.City AND s1.SeekerID <> s2.SeekerID;
+
+--Task 9: Find job seekers who applied to jobs with salaries above 850 in a different city than where they live. 
+--➡ Use JOIN + WHERE salary > 850 AND seeker.City <> job.Location
+SELECT js.FullName AS seeker_name, js.City AS seeker_city, j.Title AS job_title, j.Location AS job_city, j.Salary
+FROM Applications a
+JOIN JobSeekers js ON a.SeekerID = js.SeekerID
+JOIN Jobs j ON a.JobID = j.JobID
+WHERE j.Salary > 850 AND js.City <> j.Location;
