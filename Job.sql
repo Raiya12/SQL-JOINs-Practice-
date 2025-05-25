@@ -66,6 +66,8 @@ INSERT INTO Applications VALUES
 (303, 203, 103, '2025-05-03', 'Rejected'),
 (304, 204, 102, '2025-05-04', 'Pending');
 
+-----------------------------------------------------------------------------------------
+
 -- Task 1: Show each applicant’s full name, the job title they applied for, and the company name. Only include applicants who have actually applied.
 --➡ Use INNER JOIN. 
 SELECT js.FullName AS applicant_name, j.Title AS job_title, c.Name AS company_name
@@ -103,6 +105,8 @@ FROM Jobs j
 LEFT JOIN Applications a ON j.JobID = a.JobID
 LEFT JOIN JobSeekers js ON a.SeekerID = js.SeekerID;
 
+-----------------------------------------------------------------------------------------
+
 --Task 6:Find the names and emails of job seekers who haven’t applied to any job. Do not use NOT IN. 
 --➡ Use LEFT JOIN from JobSeekers → Applications, filter NULL. 
 SELECT js.FullName AS seeker_name, js.Email AS seeker_email
@@ -136,6 +140,8 @@ FROM Applications a
 JOIN JobSeekers js ON a.SeekerID = js.SeekerID
 JOIN Jobs j ON a.JobID = j.JobID;
 
+-----------------------------------------------------------------------------------------
+
 --Task 11: Show all job titles where no application has been submitted. 
 --➡ Use LEFT JOIN from Jobs → Applications, filter where AppID IS NULL. 
 SELECT j.Title AS job_title
@@ -166,3 +172,9 @@ SELECT js.FullName AS seeker_name, js.City AS seeker_city, j.Title AS job_title,
 FROM Applications a
 JOIN JobSeekers js ON a.SeekerID = js.SeekerID
 JOIN Jobs j ON a.JobID = j.JobID WHERE js.City <> j.Location;
+
+--Task 15 – “Jobless City, Active People” List cities where job seekers live but no company is located there. 
+--➡ Use LEFT JOIN from JobSeekers → Companies, filter where company.City IS NULL.
+SELECT DISTINCT js.City AS jobless_city
+FROM JobSeekers js
+LEFT JOIN Companies c ON js.City = c.City WHERE c.CompanyID IS NULL;
