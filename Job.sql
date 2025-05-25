@@ -1,4 +1,4 @@
-Use JobRecruitment
+﻿Use JobRecruitment
 -------------------------------------------------------------------------------
 -- Company table
 CREATE TABLE Companies (
@@ -38,7 +38,6 @@ CREATE TABLE Applications (
     FOREIGN KEY (SeekerID) REFERENCES JobSeekers(SeekerID)
 );
 
-Sample Data
 -------------------------------------------------------------------------
 -- Companies
 INSERT INTO Companies VALUES
@@ -66,3 +65,18 @@ INSERT INTO Applications VALUES
 (302, 202, 104, '2025-05-02', 'Shortlisted'),
 (303, 203, 103, '2025-05-03', 'Rejected'),
 (304, 204, 102, '2025-05-04', 'Pending');
+
+-- Task 1: Show each applicant’s full name, the job title they applied for, and the company name. Only include applicants who have actually applied.
+--➡ Use INNER JOIN. 
+SELECT js.FullName AS applicant_name, j.Title AS job_title, c.Name AS company_name
+FROM Applications a
+INNER JOIN JobSeekers js ON a.SeekerID = js.SeekerID
+INNER JOIN Jobs j ON a.JobID = j.JobID
+INNER JOIN Companies c ON j.CompanyID = c.CompanyID;
+
+-- Task 2: Show all job titles and their company names, even if nobody has applied to them yet. 
+--➡ Use LEFT JOIN from Jobs → Applications. 
+SELECT j.Title AS job_title, c.Name AS company_name
+FROM Jobs j
+LEFT JOIN Applications a ON j.JobID = a.JobID
+INNER JOIN Companies c ON j.CompanyID = c.CompanyID;
