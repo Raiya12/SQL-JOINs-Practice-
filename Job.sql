@@ -102,3 +102,9 @@ SELECT j.Title AS job_title, js.FullName AS seeker_name
 FROM Jobs j
 LEFT JOIN Applications a ON j.JobID = a.JobID
 LEFT JOIN JobSeekers js ON a.SeekerID = js.SeekerID;
+
+--Task 6:Find the names and emails of job seekers who haven’t applied to any job. Do not use NOT IN. 
+--➡ Use LEFT JOIN from JobSeekers → Applications, filter NULL. 
+SELECT js.FullName AS seeker_name, js.Email AS seeker_email
+FROM JobSeekers js
+LEFT JOIN Applications a ON js.SeekerID = a.SeekerID WHERE a.AppID IS NULL;
