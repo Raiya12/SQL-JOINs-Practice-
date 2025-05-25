@@ -89,3 +89,9 @@ INNER JOIN JobSeekers js ON a.SeekerID = js.SeekerID
 INNER JOIN Jobs j ON a.JobID = j.JobID
 WHERE js.City = j.Location;
 
+--Task 4:List all job seekers and, if available, the job titles they applied to. Show job seeker name, job title (if any), and application status (can be NULL). 
+--➡ Use LEFT JOIN from JobSeekers → Applications → Jobs. 
+SELECT js.FullName AS seeker_name, j.Title AS job_title, a.Status AS application_status
+FROM JobSeekers js
+LEFT JOIN Applications a ON js.SeekerID = a.SeekerID
+LEFT JOIN Jobs j ON a.JobID = j.JobID;
