@@ -142,3 +142,10 @@ SELECT j.Title AS job_title
 FROM Jobs j
 LEFT JOIN Applications a ON j.JobID = a.JobID
 WHERE a.AppID IS NULL;
+
+--Task 12: Find job seekers who applied to jobs in the same city they live in. Show job seeker name, job title, and matching city. 
+--➡ Use JOIN with seeker.City = job.Location.
+SELECT js.FullName AS seeker_name, j.Title AS job_title, js.City AS matching_city
+FROM Applications a
+JOIN JobSeekers js ON a.SeekerID = js.SeekerID
+JOIN Jobs j ON a.JobID = j.JobID WHERE js.City = j.Location;
