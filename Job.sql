@@ -108,3 +108,9 @@ LEFT JOIN JobSeekers js ON a.SeekerID = js.SeekerID;
 SELECT js.FullName AS seeker_name, js.Email AS seeker_email
 FROM JobSeekers js
 LEFT JOIN Applications a ON js.SeekerID = a.SeekerID WHERE a.AppID IS NULL;
+
+--Task 7: Find companies that have no jobs posted at all. 
+--➡ Use LEFT JOIN from Companies → Jobs, filter where job ID is NULL.
+SELECT c.Name AS company_name, c.Industry, c.City
+FROM Companies c
+LEFT JOIN Jobs j ON c.CompanyID = j.CompanyID WHERE j.JobID IS NULL;
