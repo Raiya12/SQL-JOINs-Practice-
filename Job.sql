@@ -159,3 +159,10 @@ JOIN Jobs j1 ON a1.JobID = j1.JobID
 JOIN JobSeekers s2 ON s1.City = s2.City AND s1.SeekerID <> s2.SeekerID
 JOIN Applications a2 ON s2.SeekerID = a2.SeekerID
 JOIN Jobs j2 ON a2.JobID = j2.JobID WHERE j1.JobID <> j2.JobID;
+
+--Task 14 :Find all jobs applied to by seekers not from the same city as the job. 
+--➡ JOIN JobSeekers → Applications → Jobs, filter city mismatch.
+SELECT js.FullName AS seeker_name, js.City AS seeker_city, j.Title AS job_title, j.Location AS job_city
+FROM Applications a
+JOIN JobSeekers js ON a.SeekerID = js.SeekerID
+JOIN Jobs j ON a.JobID = j.JobID WHERE js.City <> j.Location;
