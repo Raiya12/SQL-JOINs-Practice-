@@ -135,3 +135,10 @@ SELECT js.FullName AS seeker_name, js.City AS seeker_city,j.Location AS job_city
 FROM Applications a
 JOIN JobSeekers js ON a.SeekerID = js.SeekerID
 JOIN Jobs j ON a.JobID = j.JobID;
+
+--Task 11: Show all job titles where no application has been submitted. 
+--➡ Use LEFT JOIN from Jobs → Applications, filter where AppID IS NULL. 
+SELECT j.Title AS job_title
+FROM Jobs j
+LEFT JOIN Applications a ON j.JobID = a.JobID
+WHERE a.AppID IS NULL;
