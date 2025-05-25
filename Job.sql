@@ -80,3 +80,12 @@ SELECT j.Title AS job_title, c.Name AS company_name
 FROM Jobs j
 LEFT JOIN Applications a ON j.JobID = a.JobID
 INNER JOIN Companies c ON j.CompanyID = c.CompanyID;
+
+--Task 3:Find job seekers who applied to jobs in their own city. Display job seeker name, job title, and matching city. 
+--➡ Use JOIN with matching condition on seeker.City = job.Location. 
+SELECT js.FullName AS seeker_name, j.Title AS job_title, js.City AS matching_city
+FROM Applications a
+INNER JOIN JobSeekers js ON a.SeekerID = js.SeekerID
+INNER JOIN Jobs j ON a.JobID = j.JobID
+WHERE js.City = j.Location;
+
