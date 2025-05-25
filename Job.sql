@@ -114,3 +114,9 @@ LEFT JOIN Applications a ON js.SeekerID = a.SeekerID WHERE a.AppID IS NULL;
 SELECT c.Name AS company_name, c.Industry, c.City
 FROM Companies c
 LEFT JOIN Jobs j ON c.CompanyID = j.CompanyID WHERE j.JobID IS NULL;
+
+--Task 8: List all pairs of job seekers who live in the same city but are not the same person. Show: Seeker1 Name, Seeker2 Name, Shared City 
+--➡ Use SELF JOIN with condition: S1.City = S2.City AND S1.ID <> S2.ID
+SELECT s1.FullName AS seeker1_name, s2.FullName AS seeker2_name, s1.City AS shared_city
+FROM JobSeekers s1
+JOIN JobSeekers s2 ON s1.City = s2.City AND s1.SeekerID <> s2.SeekerID;
